@@ -11,7 +11,19 @@ const residentController =require("./controllers/resident.controller")
 
 app.use("/resident",residentController)
 
+const flatController =require("./controllers/flat.controller")
 
+app.use("/flat",flatController)
+
+
+const blockController =require("./controllers/block.controller")
+
+app.use("/block",blockController)
+
+const {register,login} =require("./controllers/auth.controller");
+app.post("/register",register);
+
+app.post("/login",login);
 app.listen(2222,async()=>{
     try{
         await connect()
