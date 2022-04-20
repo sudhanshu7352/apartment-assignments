@@ -79,6 +79,8 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+
+    navigate("/login")
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -88,6 +90,7 @@ export default function PrimarySearchAppBar() {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
+    style={{fontSize:"170px"}}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -144,15 +147,16 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} >
         <IconButton
           size="large"
+          
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle  />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -221,7 +225,7 @@ export default function PrimarySearchAppBar() {
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
+              size="larger"
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"

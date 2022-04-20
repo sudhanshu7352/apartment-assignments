@@ -3,7 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import StickyHeadTable from './components/home'
-import { Login } from './components/login'
+import SignIn from './components/login'
 import PrimarySearchAppBar from './components/navbar'
 import { Flat } from './components/flat'
 import { HomePage } from './components/homepage'
@@ -17,7 +17,7 @@ function App() {
       <Routes>
        {/* //  <Route path="/" element={<StickyHeadTable />}  /> */}
        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<SignIn />} />
         <Route path="/flat/:id" element={<Flat />} />
       </Routes>
     </div>

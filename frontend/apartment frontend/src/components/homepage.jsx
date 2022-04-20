@@ -14,10 +14,10 @@ export const HomePage =()=>{
     const data1 = useSelector((store) => store.filterData)
     console.log(data1)
          let data =[]
-    data1.slice([startIndex], [endIndex]).map((item, i) => {
-        data.push(item);
-      });
-    console.log(data1)
+    // data1.slice([startIndex], [endIndex]).map((item, i) => {
+    //     data.push(item);
+    //   });
+    // console.log(data1)
 
    useEffect(()=>{
     axios.get("https://apartment-man.herokuapp.com/block").then((res)=>{
