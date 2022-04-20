@@ -1,22 +1,63 @@
 
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom"
+import { addFlat } from "../redux/action";
 import "./home.css"
+import { SearchBar } from "./search";
 export const HomePage =()=>{
-  const [flat,setFlat] =useState([])
+ // const [flat,setFlat] =useState([])
+ const {flat} = useSelector((store) => store.flat);
+ const dispatch = useDispatch();
     const history =useNavigate()
+    const data1 = useSelector((store) => store.filterData)
+    console.log(data1)
+         let data =[]
+    data1.slice([startIndex], [endIndex]).map((item, i) => {
+        data.push(item);
+      });
+    console.log(data1)
+
    useEffect(()=>{
     axios.get("https://apartment-man.herokuapp.com/block").then((res)=>{
-        setFlat([...res.data])
+       // setFlat([...res.data])
+        dispatch(addFlat(res.data))
         console.log(res.data)
     })
    },[])
    const handleLink=(e)=>{
       history(`flat/${e.flat_id[0]._id}`)
    }
+
+   const handleSort=(e)=>{
+       const {id,value} = e.target
+           if(id == "sort_function" && value == "low"){
+             //  console.log("low")
+            let x=   flat.sort((a,b)=>a.flat_id[0].flatNo-b.flat_id[0].flatNo)
+            
+            dispatch(addFlat(x))
+           }
+           if(id == "sort_function" && value == "high"){
+           // console.log("low")
+         let x=   flat.sort((a,b)=>b.flat_id[0].flatNo-a.flat_id[0].flatNo)
+         //    setFlat([...x])
+         dispatch(addFlat(x))
+        }
+
+   }
     return (
         <div >
+            <div>
+                {/* <input type="text" placeholder="search by block name" /> */}
+                <SearchBar />
+                <select name="" id="sort_function" onChange={handleSort} >
+                    <option value="">---sort by---</option>
+                    <option value="low">low to high</option>
+                    <option value="high">high to low</option>
+                </select>
+                
+            </div>
             <table className="table_head">
                 <thead>
                     <tr>
@@ -26,7 +67,7 @@ export const HomePage =()=>{
                     </tr>
                 </thead>
                 <tbody>
-                   {flat.map((e)=>(
+                   {data && flat.map((e)=>(
                        
                     //    <Link to={`flat/${e._id}`}>
                         //    <div className="link_div">
